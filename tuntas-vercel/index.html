@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>TUNTAS — Ruang kerja pribadi</title>
+  <meta name="description" content="Manajemen tugas kantor harian yang tenang, cepat, dan tersimpan di perangkatmu sendiri.">
+  <meta name="theme-color" content="#f7f2e8">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232f6f5d'/%3E%3Cstop offset='1' stop-color='%23b96b3b'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='url(%23g)'/%3E%3Cpath d='M18 33l9 9 19-21' fill='none' stroke='white' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script>
+    /* Terapkan tema sebelum halaman digambar supaya tidak ada kedipan terang. */
+    (function () {
+      try {
+        var pref = localStorage.getItem("tuntas.theme") || "system";
+        var dark = pref === "dark" || (pref === "system" && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches);
+        document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
+      } catch (e) {}
+    })();
+  </script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Lewati ke konten</a>
+
+  <div id="app" class="app-shell">
+    <header class="app-header" id="app-header">
+      <a class="brand" href="#dashboard" data-action="nav" data-view="dashboard">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17.5l6 6L26 9.5"/></svg>
+        </span>
+        <span class="brand-text">
+          <span class="brand-name">TUNTAS</span>
+          <span class="brand-sub">ruang kerja pribadi</span>
+        </span>
+      </a>
+
+      <div class="header-actions">
+        <span class="save-pill" id="header-save" title="Data tersimpan di peramban ini">
+          <span class="save-dot" aria-hidden="true"></span>
+          <span id="header-save-text">Tersimpan</span>
+        </span>
+        <button type="button" class="icon-btn" data-action="open-data" title="Data, cadangan &amp; pindah perangkat" aria-label="Data dan cadangan">
+          <span data-icon="database"></span>
+        </button>
+        <button type="button" class="icon-btn" id="theme-btn" data-action="cycle-theme" title="Ganti tampilan">
+          <span data-icon="sun"></span>
+        </button>
+        <button type="button" class="btn btn-ghost focus-header-btn" data-action="goto-focus" title="Buka Fokus Hari Ini (F)">
+          <span data-icon="target"></span>
+          <span class="btn-label focus-header-label">Fokus hari ini</span>
+          <span class="focus-header-count" id="focus-header-count">0</span>
+        </button>
+        <button type="button" class="btn btn-primary new-task-btn" data-action="new-task" title="Tambah tugas baru (N)">
+          <span data-icon="plus"></span>
+          <span class="btn-label-full">Tugas baru</span>
+        </button>
+      </div>
+    </header>
+
+    <nav class="app-nav" id="app-nav" aria-label="Navigasi utama"></nav>
+
+    <main class="app-main" id="main" tabindex="-1">
+      <div class="view-loading">
+        <span class="loading-spinner" aria-hidden="true"></span>
+        <p>Menyiapkan ruang kerjamu…</p>
+      </div>
+    </main>
+
+    <footer class="app-footer">
+      <div class="footer-left">
+        <span id="footer-status" class="footer-status" role="status" aria-live="polite">
+          <span class="save-dot" aria-hidden="true"></span>
+          <span id="footer-status-text">Tersimpan di perangkat ini</span>
+        </span>
+      </div>
+      <div class="footer-right">
+        <span class="footer-shortcuts" aria-hidden="true"><kbd>N</kbd> tugas baru <span>·</span> <kbd>F</kbd> fokus <span>·</span> <kbd>/</kbd> cari</span>
+        <button type="button" class="footer-link" data-action="open-data">Cadangkan data</button>
+      </div>
+    </footer>
+  </div>
+
+  <div id="reminder-modal-root"></div>
+  <div id="calendar-modal-root"></div>
+  <div id="report-modal-root"></div>
+  <div id="task-modal-root"></div>
+  <div id="data-modal-root"></div>
+  <div id="confirm-root"></div>
+  <div id="dock-root"></div>
+  <div id="toast-root" class="toast-root" role="status" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

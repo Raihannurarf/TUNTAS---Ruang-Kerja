@@ -1,0 +1,13 @@
+{
+  "name": "tuntas",
+  "version": "1.0.0",
+  "private": true,
+  "description": "TUNTAS — ruang kerja pribadi, siap deploy ke Vercel",
+  "type": "commonjs",
+  "engines": {
+    "node": "24.x"
+  },
+  "scripts": {
+    "dev": "vercel dev"
+  }
+}
